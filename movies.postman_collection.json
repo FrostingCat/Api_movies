@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "636ff9b7-4659-4cdd-9547-1ba552d93f19",
+		"name": "movies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27668391"
+	},
+	"item": [
+		{
+			"name": "localhost:8075/api/tickets",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8075/api/tickets",
+					"host": [
+						"localhost"
+					],
+					"port": "8075",
+					"path": [
+						"api",
+						"tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8075/api/showtimes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8075/api/showtimes",
+					"host": [
+						"localhost"
+					],
+					"port": "8075",
+					"path": [
+						"api",
+						"showtimes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8075/api/movies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8075/api/movies",
+					"host": [
+						"localhost"
+					],
+					"port": "8075",
+					"path": [
+						"api",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
