@@ -1,5 +1,6 @@
 package com.example.api_autho.rest;
 
+import com.example.api_autho.dto.OrderTicketDto;
 import com.example.api_autho.model.MovieList;
 import com.example.api_autho.model.ShowtimeList;
 import com.example.api_autho.model.Ticket;
@@ -7,10 +8,7 @@ import com.example.api_autho.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -50,16 +48,12 @@ public class CinemaRestController {
     }
 
     @PostMapping("tickets")
-    public ResponseEntity getTickets() {
-        List<Ticket> tickets = orderService.findTickets();
-
-        if (tickets.isEmpty()) {
-            return new ResponseEntity<>("no tickets", HttpStatus.BAD_REQUEST);
+    public ResponseEntity getTickets(@RequestBody OrderTicketDto orderTicket) {
+        if (orderService.checkTickets(orderTicket.getId(), orderTicket.getAmount())) {
+            return new ResponseEntity<>("not enough tickets", HttpStatus.BAD_REQUEST);
         }
 
-        Map<Object, Object> response = new HashMap<>();
-        response.put("tickets", tickets);
-
-        return ResponseEntity.ok(response);
+        orderService.orderTickets(orderTicket.getId(), orderTicket.getAmount());
+        return ResponseEntity.ok("tickets are ordered");
     }
 }
