@@ -10,5 +10,6 @@ import java.util.List;
 public interface OrderService {
     List<MovieList> findMovies();
     List<ShowtimeList> findShowtimes();
-    List<Ticket> findTickets();
+    void orderTickets(Long id, int quantity);
+    boolean checkTickets(Long name, int quantity);
 }
