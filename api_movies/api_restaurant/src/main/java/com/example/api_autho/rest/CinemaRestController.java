@@ -5,6 +5,7 @@ import com.example.api_autho.model.ShowtimeList;
 import com.example.api_autho.model.Ticket;
 import com.example.api_autho.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,9 @@ public class CinemaRestController {
     @GetMapping("movies")
     public ResponseEntity getMovies() {
         List<MovieList> movies = orderService.findMovies();
+        if (movies.isEmpty()) {
+            return new ResponseEntity<>("no movies", HttpStatus.BAD_REQUEST);
+        }
 
         Map<Object, Object> response = new HashMap<>();
         response.put("movies", movies);
@@ -35,6 +39,10 @@ public class CinemaRestController {
     public ResponseEntity getShowtimes() {
         List<ShowtimeList> showtimes = orderService.findShowtimes();
 
+        if (showtimes.isEmpty()) {
+            return new ResponseEntity<>("no showtimes", HttpStatus.BAD_REQUEST);
+        }
+
         Map<Object, Object> response = new HashMap<>();
         response.put("showtimes", showtimes);
 
@@ -44,6 +52,10 @@ public class CinemaRestController {
     @PostMapping("tickets")
     public ResponseEntity getTickets() {
         List<Ticket> tickets = orderService.findTickets();
+
+        if (tickets.isEmpty()) {
+            return new ResponseEntity<>("no tickets", HttpStatus.BAD_REQUEST);
+        }
 
         Map<Object, Object> response = new HashMap<>();
         response.put("tickets", tickets);
